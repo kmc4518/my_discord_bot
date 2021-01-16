@@ -5,7 +5,8 @@ from spotipy.oauth2 import SpotifyOAuth
 
 # Secrets
 DISCORD_TOKEN = open("discord_token.txt", "r").readline()
-SPOTIFY_PLAYLIST_TOKEN = open("sp_playlist_token.txt", "r").readline()
+MASTER_PLAYLIST_TOKEN = open("master_playlist_token.txt", "r").readline()
+YEARONE_PLAYLIST_TOKEN = open("yearone_playlist_token.txt", "r").readline()
 
 # Define scope & command prexix
 scope = "playlist-modify-public"
@@ -25,7 +26,8 @@ async def ping(ctx):
 async def add(ctx, *args):
     tracks = [*args]
     print(tracks)
-    sp.playlist_add_items(SPOTIFY_PLAYLIST_TOKEN, tracks)
+    sp.playlist_add_items(MASTER_PLAYLIST_TOKEN, tracks)
+    sp.playlist_add_items(YEARONE_PLAYLIST_TOKEN, tracks)
     await ctx.send("Done")
 
 # Print client detials on startup
