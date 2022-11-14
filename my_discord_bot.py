@@ -1,5 +1,6 @@
 """
-KMC4518 Discord Bot 2022
+V1.0 KMC4518 Discord Bot 2022
+V1.1 JS 2022 #move secrets from files to ENV Vars
 """
 
 import time
@@ -9,11 +10,9 @@ from discord.ext import commands
 from spotipy.oauth2 import SpotifyOAuth
 
 # Secrets
-DISCORD_TOKEN = open("discord_token.txt", "r", encoding='UTF-8').readline()
-MASTER_PLAYLIST_TOKEN = open(
-    "master_playlist_token.txt", "r", encoding='UTF-8').readline()
-YEARTWO_PLAYLIST_TOKEN = open(
-    "yeartwo_playlist_token.txt", "r", encoding='UTF-8').readline()
+DISCORD_TOKEN = os.environ['ENV_DISCORD_TOKEN']
+MASTER_PLAYLIST_TOKEN = os.environ['ENV_MASTER_PLAYLIST_TOKEN']
+YEAR_PLAYLIST_TOKEN = os.environ['ENV_YEAR_PLAYLIST_TOKEN']
 
 # Define scope & command prexix
 scope = "playlist-modify-public"
@@ -22,7 +21,6 @@ client = commands.Bot(command_prefix="+")
 
 # Remove default help command
 client.remove_command('help')
-
 
 @client.command()
 async def ping(ctx):
@@ -36,7 +34,7 @@ async def add(ctx, *args):
     tracks = [*args]
     print(tracks)
     sp.playlist_add_items(MASTER_PLAYLIST_TOKEN, tracks)
-    sp.playlist_add_items(YEARTWO_PLAYLIST_TOKEN, tracks)
+    sp.playlist_add_items(YEAR_PLAYLIST_TOKEN, tracks)
     await ctx.send("Song added!")
 
 
@@ -50,4 +48,3 @@ async def on_ready():
 
 client.run(DISCORD_TOKEN)
 
-# 2022!!!!!
