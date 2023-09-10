@@ -1,8 +1,7 @@
 """
-KMC4518 Discord Bot 2022
+KMC4518 Discord Bot 2023
 """
 
-import time
 import discord
 import spotipy
 import os
@@ -42,6 +41,9 @@ async def add(ctx, *args):
     sp.playlist_add_items(YEARTWO_PLAYLIST_TOKEN, tracks)
     await ctx.send("Song added!")
 
+print(DISCORD_TOKEN)
+print(MASTER_PLAYLIST_TOKEN)
+print(YEARTWO_PLAYLIST_TOKEN)
 
 @client.event
 async def on_ready():
@@ -52,5 +54,3 @@ async def on_ready():
     print('------')
 
 client.run(DISCORD_TOKEN)
-
-# 2022!!!!!
